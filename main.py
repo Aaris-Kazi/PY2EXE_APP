@@ -1,7 +1,8 @@
-import tkinter as tk
+from tkinter import *
 
 def main():
-    app = tk.Tk()
+    app = Tk()
+    app.geometry('720x480')
     app.mainloop()
 
 if __name__ == '__main__':
