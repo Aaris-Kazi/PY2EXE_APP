@@ -1,4 +1,8 @@
 import tkinter as tk
 
-app = tk.Tk()
-app.mainloop()
+def main():
+    app = tk.Tk()
+    app.mainloop()
+
+if __name__ == '__main__':
+    main()
