@@ -4,9 +4,6 @@ import subprocess as sub
 
 output = ''
 
-
-
-
 def main():
     app = Tk()
     
@@ -15,7 +12,7 @@ def main():
     
     def test():
         # os.system('python test.py')
-        p = sub.Popen('python test.py',stdout=sub.PIPE,stderr=sub.PIPE)
+        p = sub.Popen('pip install pyinstaller',stdout=sub.PIPE,stderr=sub.PIPE)
         output, errors = p.communicate()
         text.insert(END, output)
     
