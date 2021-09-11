@@ -4,7 +4,6 @@ import subprocess as sub
 from threading import Thread
 from tkinter import filedialog
 
-
 def main():
     output = ''
     filename = ''
@@ -15,25 +14,41 @@ def main():
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
+
+    # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
+    frame = Frame(app, width= 200, height = 480, bg = 'blue')
+    install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
+    convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
     def openfile():
         words.delete(0, END)
-        filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
-        if filename:
-          filepath = os.path.abspath(filename.name)
+        try:
+            filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
+            if filename:
+                filepath = os.path.abspath(filename.name)
 
-        print(filepath)
-        words.insert(0, filepath)
-        filename = os.path.basename(filepath)
-        print(filename)
-        fp = filepath.split(filename)
-        print(fp[0])
+            print(filepath)
+            words.config(state=NORMAL)
+            words.insert(0, filepath)
+            words.config(state=DISABLED)
+            filename = os.path.basename(filepath)
+            print(filename)
+            fp = filepath.split(filename)
+            print(fp[0])
+            
+        except Exception as e:
+            words.config(state=NORMAL)
+            words.delete(0, END)
+            words.config(state=DISABLED)
+        
     
     def package_installer():
+        text1.config(state=NORMAL)
         # os.system('python test.py')
         p = sub.Popen('pip install pyinstaller',stdout=sub.PIPE,stderr=sub.PIPE)
         output, errors = p.communicate()
         text1.insert(END, output)
+        text1.config(state=DISABLED)
 
     def installer():
         words.place_forget()
@@ -46,10 +61,6 @@ def main():
         words.place(x = 220, y = 10, width = 400)
         text1.place_forget()
         b1.place_forget()
-    # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
-    frame = Frame(app, width= 200, height = 480, bg = 'blue')
-    install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
-    convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
 
     frame.place(x = 0, y = 0)
     install_module.place(x = 50, y = 20)
