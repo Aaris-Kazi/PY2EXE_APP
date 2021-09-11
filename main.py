@@ -16,8 +16,12 @@ def main():
     def openfile():
         words.delete(0, END)
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a file",filetypes=(("txt files","*.txt"),("All files",'*')))
-        print(filename)
-        words.insert(0, filename)
+        if filename:
+          filepath = os.path.abspath(filename.name)
+
+        print(filepath)
+        print(os.path.basename(filepath))
+        words.insert(0, filepath)
     
     def package_installer():
         # os.system('python test.py')
