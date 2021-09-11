@@ -3,9 +3,12 @@ import os
 import subprocess as sub
 from threading import Thread
 from tkinter import filedialog
-output = ''
+
 
 def main():
+    output = ''
+    filename = ''
+    fp = []
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
     app = Tk()
     text1 = Text(app)
@@ -20,11 +23,11 @@ def main():
           filepath = os.path.abspath(filename.name)
 
         print(filepath)
+        words.insert(0, filepath)
         filename = os.path.basename(filepath)
         print(filename)
         fp = filepath.split(filename)
         print(fp[0])
-        words.insert(0, filepath)
     
     def package_installer():
         # os.system('python test.py')
