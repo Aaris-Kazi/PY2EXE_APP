@@ -7,15 +7,16 @@ output = ''
 
 def main():
     app = Tk()
+    text1 = Text(app)
+    b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
+    words = Entry(app)
+    open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
+    
     def openfile():
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a file",filetypes=(("txt files","*.txt"),("All files",'*')))
         print(filename)
     
-    text1 = Text(app)
-    b1 = Button(app, text= 'INSTALL MODULE', command = lambda: test())
-    words = Entry(app)
-    open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
-    def test():
+    def package_installer():
         # os.system('python test.py')
         p = sub.Popen('pip install pyinstaller',stdout=sub.PIPE,stderr=sub.PIPE)
         output, errors = p.communicate()
