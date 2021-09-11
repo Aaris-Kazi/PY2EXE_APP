@@ -14,8 +14,10 @@ def main():
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     # //////////////       Defining Functions        ////////////////////////
     def openfile():
+        words.delete(0, END)
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a file",filetypes=(("txt files","*.txt"),("All files",'*')))
         print(filename)
+        words.insert(0, filename)
     
     def package_installer():
         # os.system('python test.py')
