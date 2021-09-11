@@ -14,6 +14,7 @@ def main():
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
+    compiling = Button(app, text = 'RUN/ TEST')
 
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
@@ -35,11 +36,13 @@ def main():
             print(filename)
             fp = filepath.split(filename)
             print(fp[0])
+            compiling.place(x = 460, y = 240)
             
         except Exception as e:
             words.config(state=NORMAL)
             words.delete(0, END)
             words.config(state=DISABLED)
+            compiling.place_forget()
         
     
     def package_installer():
