@@ -6,12 +6,13 @@ from tkinter import filedialog
 output = ''
 
 def main():
+    # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
     app = Tk()
     text1 = Text(app)
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
-    
+    # //////////////       Defining Functions        ////////////////////////
     def openfile():
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a file",filetypes=(("txt files","*.txt"),("All files",'*')))
         print(filename)
@@ -29,11 +30,11 @@ def main():
         b1.place(x = 460, y = 400)
 
     def converter():
-        open_button.place(x = 300, y = 10)
-        words.place(x = 220, y = 10)
+        open_button.place(x = 400, y = 40)
+        words.place(x = 220, y = 10, width = 400)
         text1.place_forget()
         b1.place_forget()
-    
+    # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
