@@ -1,14 +1,18 @@
 from tkinter import *
 import os
 import subprocess as sub
+from threading import Thread
 
 output = ''
 
 def main():
     app = Tk()
-    
-    # text = Text(app)
-    # text.pack()
+    def installer():
+        text = Text(app)
+        text.pack()
+        # b1 = Button(app, text= 'INSTALL MODULE', command = lambda: test())
+        b1 = Button(app, text= 'INSTALL MODULE')
+        b1.pack()
     
     # def test():
     #     # os.system('python test.py')
@@ -17,12 +21,14 @@ def main():
     #     text.insert(END, output)
     
 
-    # b1 = Button(app, text= 'INSTALL MODULE', command = lambda: test())
-    # b1.pack()
 
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     frame.place(x = 0, y = 0)
-    # frame.pack(x = 0, y = 0)
+
+    install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
+    install_module.place(x = 50, y = 20)
+    convert = Button(app, text = 'CONVERT TO EXE')
+    convert.place(x = 50, y = 50)
 
     
     app.title('Transformer')
