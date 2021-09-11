@@ -36,14 +36,13 @@ def main():
 
 
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
-    frame.place(x = 0, y = 0)
-
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
-    install_module.place(x = 50, y = 20)
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
+
+    frame.place(x = 0, y = 0)
+    install_module.place(x = 50, y = 20)
     convert.place(x = 50, y = 70)
 
-    
     app.title('Transformer')
     app.geometry('920x480')
     app.mainloop()
