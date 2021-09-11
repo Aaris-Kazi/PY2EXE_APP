@@ -7,13 +7,15 @@ output = ''
 
 def main():
     app = Tk()
+    text1 = Text(app)
+    b1 = Button(app, text= 'INSTALL MODULE')
     def installer():
-        text = Text(app)
-        text.pack()
+        text1.place(x = 220, y = 10)
         # b1 = Button(app, text= 'INSTALL MODULE', command = lambda: test())
-        b1 = Button(app, text= 'INSTALL MODULE')
-        b1.pack()
-    
+        b1.place(x = 460, y = 400)
+    def converter():
+        text1.place_forget()
+        b1.place_forget()
     # def test():
     #     # os.system('python test.py')
     #     p = sub.Popen('pip install pyinstaller',stdout=sub.PIPE,stderr=sub.PIPE)
@@ -27,12 +29,12 @@ def main():
 
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     install_module.place(x = 50, y = 20)
-    convert = Button(app, text = 'CONVERT TO EXE')
-    convert.place(x = 50, y = 50)
+    convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
+    convert.place(x = 50, y = 70)
 
     
     app.title('Transformer')
-    app.geometry('720x480')
+    app.geometry('920x480')
     app.mainloop()
 
 if __name__ == '__main__':
