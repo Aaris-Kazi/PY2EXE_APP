@@ -7,6 +7,7 @@ from tkinter import filedialog
 def main():
     output = ''
     filename = ''
+    new_filename = ''
     fp = []
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
     app = Tk()
@@ -14,13 +15,14 @@ def main():
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
-    compiling = Button(app, text = 'RUN/ TEST')
+    compiling = Button(app, text = 'RUN/ TEST', command = lambda: compilation())
 
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
+
     def openfile():
         words.delete(0, END)
         try:
@@ -32,9 +34,9 @@ def main():
             words.config(state=NORMAL)
             words.insert(0, filepath)
             words.config(state=DISABLED)
-            filename = os.path.basename(filepath)
-            print(filename)
-            fp = filepath.split(filename)
+            new_filename = os.path.basename(filepath)
+            print(new_filename)
+            fp = filepath.split(new_filename)
             print(fp[0])
             compiling.place(x = 460, y = 240)
             
@@ -43,8 +45,15 @@ def main():
             words.delete(0, END)
             words.config(state=DISABLED)
             compiling.place_forget()
+            print(e)
         
-    
+    def compilation():
+        # n = str(fp[0])
+        # print('cd '+n)
+        print(fp)
+        # os.system('cd'+fp[0])
+        # os.system('python'+new_filename)
+
     def package_installer():
         text1.config(state=NORMAL)
         # os.system('python test.py')
