@@ -15,7 +15,7 @@ def main():
     # //////////////       Defining Functions        ////////////////////////
     def openfile():
         words.delete(0, END)
-        filename=filedialog.askopenfile(initialdir='GUI/',title="Select a file",filetypes=(("txt files","*.txt"),("All files",'*')))
+        filename=filedialog.askopenfile(initialdir='GUI/',title="Select a file",filetypes=(("Python files","*.py"),("All files",'*')))
         if filename:
           filepath = os.path.abspath(filename.name)
 
