@@ -8,6 +8,8 @@ import io
 
 the_com_file_path = ''
 the_com_file = ''
+filep = ''
+new_filename = ''
 def main():
     output = ''
     
@@ -17,6 +19,7 @@ def main():
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
+    compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     
 
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
@@ -35,9 +38,14 @@ def main():
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
         try:
             print("file name",filename)
-            if filename:
-                filepath = os.path.abspath(filename.name)
-                print('openfile: '+filepath)
+            try:
+                if filename:
+                    filepath = os.path.abspath(filename.name)
+                    print('openfile: '+filepath)
+            except Exception:
+                filep = ''
+                filename = ''
+                compilation(filep, new_filename)
 
             # print(filepath)
             words.config(state=NORMAL)
@@ -47,31 +55,43 @@ def main():
             print(new_filename)
             fp = filepath.split(new_filename)
             filep = fp[0]
-            print(filep)
-            print(type(filep))
-            compiling = Button(app, text = 'RUN/ TEST', command = lambda: compilation(filep, new_filename))
-            if filename == 'None' or filename == '':
-                compiling.place_forget()
+            f = open("file_path.txt", "w")
+            f.write(filep)
+            f = open("file_name.txt", "w")
+            f.write(new_filename)
+            f.close()
             compiling.place(x = 460, y = 240)
+                
         except Exception as e:
             filep, new_filename= '', None
+            compilation(filep, new_filename)
             print('file is none', e)
             words.config(state=NORMAL)
             words.delete(0, END)
             words.config(state=DISABLED)
+            compiling.place_forget()
+            # app.destroy()
         
             
             
-    def compilation(filep, new_filename):
-        if new_filename == '' or new_filename == None or filep == '' or filep == None:
-            print('Unable to proceed ahead')
-        else:
-            print(filep)
-            print(new_filename)
-            # n = str(fp[0])
-            # print('cd '+filep)
-            os.system('cd '+filep)
-            os.system('python '+new_filename)
+    def compilation():
+        f = open(r"file_name.txt", "r")
+        filename = f.read()
+        f = open(r"file_path.txt", "r")
+        filepath = f.read()
+        # print(filepath)
+        # print(filename)
+        os.system('cd '+filepath)
+        os.system('python '+filename)
+        # if new_filename == '' or new_filename == None or filep == '' or filep == None:
+        #     print('Unable to proceed ahead')
+        # else:
+        #     print(filep)
+        #     print(new_filename)
+        #     # n = str(fp[0])
+        #     # print('cd '+filep)
+        #     os.system('cd '+filep)
+        #     os.system('python '+new_filename)
 
     def package_installer():
         text1.config(state=NORMAL)
