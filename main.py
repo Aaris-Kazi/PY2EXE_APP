@@ -16,10 +16,13 @@ def main():
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
     app = Tk()
     text1 = Text(app)
+    text1.config(state=DISABLED)
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
+    words.config(state=DISABLED)
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
+    exe = Button(app, text = 'CONVERT TO EXE')
     
 
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
@@ -35,15 +38,16 @@ def main():
         
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
         try:
-            print("file name",filename)
+            # print("file name",filename)
             if filename:
                 filepath = os.path.abspath(filename.name)
-                print('openfile: '+filepath)
+                # print('openfile: '+filepath)
             
             words.config(state=NORMAL)
             words.insert(0, filepath)
             words.config(state=DISABLED)
             new_filename = os.path.basename(filepath)
+            print(filepath)
             print(new_filename)
             fp = filepath.split(new_filename)
             filep = fp[0]
@@ -52,8 +56,8 @@ def main():
             f = open("file_name.txt", "w")
             f.write(new_filename)
             f.close()
-            compiling.place(x = 460, y = 240)
-            converter
+            compiling.place(x = 700, y = 450)
+            exe.place(x = 800, y = 450)
                 
         except Exception as e:
             f = open("file_path.txt", "w")
@@ -64,9 +68,6 @@ def main():
             words.delete(0, END)
             words.config(state=DISABLED)
             compiling.place_forget()
-            # app.destroy()
-        
-            
             
     def compilation():
         try:
@@ -80,7 +81,7 @@ def main():
                 os.system('cd '+filepath)
                 os.system('python '+filename)
         except Exception as e:
-            messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files")
+            messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files!")
             app.destroy()
 
     def package_installer():
