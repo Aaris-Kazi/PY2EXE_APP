@@ -58,6 +58,7 @@ def main():
             f = open("file_name.txt", "w")
             f.write(new_filename)
             f.close()
+            text2.place(x = 220, y = 80, height = 350)
             compiling.place(x = 700, y = 450)
             exe.place(x = 800, y = 450)
                 
@@ -71,7 +72,7 @@ def main():
             words.config(state=DISABLED)
             compiling.place_forget()
             exe.place_forget()
-            
+            text2.place_forget()
     def compilation():
         try:
             f = open(r"file_name.txt", "r")
@@ -100,6 +101,7 @@ def main():
         exe.place_forget()
         words.place_forget()
         open_button.place_forget()
+        text2.place_forget()
         text1.place(x = 220, y = 10)
         b1.place(x = 460, y = 400)
 
@@ -108,7 +110,7 @@ def main():
         b1.place_forget()
         open_button.place(x = 400, y = 40)
         words.place(x = 220, y = 10, width = 400)
-        text1.place(x = 220, y = 10)
+        
 
     frame.place(x = 0, y = 0)
     install_module.place(x = 50, y = 20)
