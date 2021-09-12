@@ -28,11 +28,33 @@ def main():
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
     def py_exe():
-        print('Hello')
         text2.config(state=NORMAL)
         text2.delete('1.0', END)
-        text2.insert(0, 'CONVERTING PY TO EXE')
         text2.config(state = DISABLED)
+        try:
+            f = open(r"file_name.txt", "r")
+            filename = f.read()
+            f = open(r"file_path.txt", "r")
+            filepath = f.read()
+            if filename == '' or filename == None or filepath == '' or filepath == None:
+                print('it is empty')
+            else:
+                text2.config(state=NORMAL)
+                text2.insert(END, 'CONVERTING THE PROGRAM\n')
+                # p = sub.Popen('cd '+filepath ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
+                # output, errors = p.communicate()
+                # text2.insert(END, output)
+                # p = sub.Popen("python "+filename ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
+                # output, errors = p.communicate()
+                # text2.insert(END, output)
+                text2.config(state=DISABLED) 
+                os.system('cd '+filepath)
+                os.system('pyinstaller --onefile '+filename)
+                # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
+        except Exception as e:
+            # print(e)
+            messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files!")
+            app.destroy()
     def openfile():
         words.config(state=NORMAL)
         words.delete(0, END)
@@ -83,21 +105,16 @@ def main():
                 print('it is empty')
             else:
                 text2.config(state=NORMAL)
-                # text2.delete(0, END)
                 text2.insert(END, 'RUNNING THE PROGRAM\n')
-                pathing = r"C:\Users\aaris\Desktop\Pithooooon\PY2EXE_APP"
                 p = sub.Popen('cd '+filepath ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
                 output, errors = p.communicate()
                 text2.insert(END, output)
                 p = sub.Popen("python "+filename ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
                 output, errors = p.communicate()
                 text2.insert(END, output)
-                text2.config(state=DISABLED)
-                # os.system("start cmd /c {command here}")  
+                text2.config(state=DISABLED) 
                 # os.system('cd '+filepath)
                 # os.system('python '+filename)
-                # os.remove("file_name.txt")
-                # os.remove("file_path.txt")
         except Exception as e:
             # print(e)
             messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files!")
