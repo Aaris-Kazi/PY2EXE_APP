@@ -3,19 +3,21 @@ import os
 import subprocess as sub
 from threading import Thread
 from tkinter import filedialog
+import time
+import io
 
+the_com_file_path = ''
+the_com_file = ''
 def main():
     output = ''
-    filename = ''
-    new_filename = ''
-    fp = []
+    
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
     app = Tk()
     text1 = Text(app)
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
-    compiling = Button(app, text = 'RUN/ TEST', command = lambda: compilation())
+    
 
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
@@ -24,35 +26,52 @@ def main():
     # //////////////       Defining Functions        ////////////////////////
 
     def openfile():
+        words.config(state=NORMAL)
         words.delete(0, END)
+        words.config(state=DISABLED)
+
+        filep, new_filename= '', ''
+        
+        filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
         try:
-            filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
+            print("file name",filename)
             if filename:
                 filepath = os.path.abspath(filename.name)
+                print('openfile: '+filepath)
 
-            print(filepath)
+            # print(filepath)
             words.config(state=NORMAL)
             words.insert(0, filepath)
             words.config(state=DISABLED)
             new_filename = os.path.basename(filepath)
             print(new_filename)
             fp = filepath.split(new_filename)
-            print(fp[0])
+            filep = fp[0]
+            print(filep)
+            print(type(filep))
+            compiling = Button(app, text = 'RUN/ TEST', command = lambda: compilation(filep, new_filename))
+            if filename == 'None' or filename == '':
+                compiling.place_forget()
             compiling.place(x = 460, y = 240)
-            
         except Exception as e:
+            filep, new_filename= '', None
+            print('file is none', e)
             words.config(state=NORMAL)
             words.delete(0, END)
             words.config(state=DISABLED)
-            compiling.place_forget()
-            print(e)
         
-    def compilation():
-        # n = str(fp[0])
-        # print('cd '+n)
-        print(fp)
-        # os.system('cd'+fp[0])
-        # os.system('python'+new_filename)
+            
+            
+    def compilation(filep, new_filename):
+        if new_filename == '' or new_filename == None or filep == '' or filep == None:
+            print('Unable to proceed ahead')
+        else:
+            print(filep)
+            print(new_filename)
+            # n = str(fp[0])
+            # print('cd '+filep)
+            os.system('cd '+filep)
+            os.system('python '+new_filename)
 
     def package_installer():
         text1.config(state=NORMAL)
