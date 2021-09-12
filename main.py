@@ -66,6 +66,9 @@ def main():
             exe.place_forget()
             text2.place_forget()
     def compilation():
+        # text2.config(state=NORMAL)
+        # text2.delete(0, END)
+        # text2.config(state = DISABLED)
         try:
             f = open(r"file_name.txt", "r")
             filename = f.read()
@@ -74,15 +77,30 @@ def main():
             if filename == '' or filename == None or filepath == '' or filepath == None:
                 print('it is empty')
             else:
+                text2.config(state=NORMAL)
+                # text2.delete(0, END)
+                text2.insert(END, 'RUNNING THE PROGRAM\n')
+                pathing = r"C:\Users\aaris\Desktop\Pithooooon\PY2EXE_APP"
+                p = sub.Popen('cd '+filepath ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
+                output, errors = p.communicate()
+                text2.insert(END, output)
+                p = sub.Popen("python "+filename ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
+                output, errors = p.communicate()
+                text2.insert(END, output)
+                text2.config(state=DISABLED)
+                # os.system("start cmd /c {command here}")  
                 os.system('cd '+filepath)
                 os.system('python '+filename)
+                # os.remove("file_name.txt")
+                # os.remove("file_path.txt")
         except Exception as e:
+            # print(e)
             messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files!")
             app.destroy()
     def package_installer():
         text1.config(state=NORMAL)
-        # os.system('python test.py')
-        p = sub.Popen('pip install pyinstaller',stdout=sub.PIPE,stderr=sub.PIPE)
+        os.system('python test.py')
+        p = sub.Popen('pip install pyinstaller',stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
         output, errors = p.communicate()
         text1.insert(END, output)
         text1.config(state=DISABLED)
