@@ -53,6 +53,7 @@ def main():
             f.write(new_filename)
             f.close()
             compiling.place(x = 460, y = 240)
+            converter
                 
         except Exception as e:
             f = open("file_path.txt", "w")
@@ -79,7 +80,8 @@ def main():
                 os.system('cd '+filepath)
                 os.system('python '+filename)
         except Exception as e:
-            messagebox.showinfo("File deleted",  "We have observed in the deletion of file please stop tampering the files")
+            messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files")
+            app.destroy()
 
     def package_installer():
         text1.config(state=NORMAL)
