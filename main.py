@@ -49,7 +49,7 @@ def main():
                 # text2.insert(END, output)
                 text2.config(state=DISABLED) 
                 os.system('cd '+filepath)
-                os.system('pyinstaller --onefile '+filename)
+                os.system('pyinstaller --onefile -w '+filename)
                 # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
         except Exception as e:
             # print(e)
