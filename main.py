@@ -21,13 +21,18 @@ def main():
     words.config(state=DISABLED)
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
-    exe = Button(app, text = 'CONVERT TO EXE')
+    exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
-
+    def py_exe():
+        print('Hello')
+        text2.config(state=NORMAL)
+        text2.delete('1.0', END)
+        text2.insert(0, 'CONVERTING PY TO EXE')
+        text2.config(state = DISABLED)
     def openfile():
         words.config(state=NORMAL)
         words.delete(0, END)
@@ -66,9 +71,9 @@ def main():
             exe.place_forget()
             text2.place_forget()
     def compilation():
-        # text2.config(state=NORMAL)
-        # text2.delete(0, END)
-        # text2.config(state = DISABLED)
+        text2.config(state=NORMAL)
+        text2.delete('1.0', END)
+        text2.config(state = DISABLED)
         try:
             f = open(r"file_name.txt", "r")
             filename = f.read()
@@ -89,8 +94,8 @@ def main():
                 text2.insert(END, output)
                 text2.config(state=DISABLED)
                 # os.system("start cmd /c {command here}")  
-                os.system('cd '+filepath)
-                os.system('python '+filename)
+                # os.system('cd '+filepath)
+                # os.system('python '+filename)
                 # os.remove("file_name.txt")
                 # os.remove("file_path.txt")
         except Exception as e:
@@ -99,7 +104,7 @@ def main():
             app.destroy()
     def package_installer():
         text1.config(state=NORMAL)
-        os.system('python test.py')
+        # os.system('python test.py')
         p = sub.Popen('pip install pyinstaller',stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
         output, errors = p.communicate()
         text1.insert(END, output)
