@@ -68,6 +68,7 @@ def main():
             words.delete(0, END)
             words.config(state=DISABLED)
             compiling.place_forget()
+            exe.place_forget()
             
     def compilation():
         try:
