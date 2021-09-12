@@ -104,10 +104,11 @@ def main():
         b1.place(x = 460, y = 400)
 
     def converter():
-        open_button.place(x = 400, y = 40)
-        words.place(x = 220, y = 10, width = 400)
         text1.place_forget()
         b1.place_forget()
+        open_button.place(x = 400, y = 40)
+        words.place(x = 220, y = 10, width = 400)
+        text1.place(x = 220, y = 10)
 
     frame.place(x = 0, y = 0)
     install_module.place(x = 50, y = 20)
