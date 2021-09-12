@@ -12,6 +12,7 @@ def main():
     output = ''
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
     app = Tk()
+    var = IntVar()
     text1 = Text(app)
     text2 = Text(app)
     text1.config(state=DISABLED)
@@ -22,11 +23,21 @@ def main():
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
+    r1 = Radiobutton(app, text="WITH TERMINAL", variable=var, value=1, command = lambda:selection())
+    r2 = Radiobutton(app, text="WITHOUT TERMINAL", variable=var, value=2, command = lambda: selection())
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
+    def selection():
+        # print(str(var.get())
+        print(str(var.get()))
+        f = open("terminal_options.txt", "w")
+        f.write(str(var.get()))
+        f.close()
+        # print('Hello')
+
     def py_exe():
         text2.config(state=NORMAL)
         text2.delete('1.0', END)
@@ -78,6 +89,9 @@ def main():
             f = open("file_name.txt", "w")
             f.write(new_filename)
             f.close()
+            r1.select()
+            r1.place( x = 500, y = 50)
+            r2.place( x = 650, y = 50)
             text2.place(x = 220, y = 80, height = 350)
             compiling.place(x = 700, y = 450)
             exe.place(x = 800, y = 450)
@@ -92,6 +106,8 @@ def main():
             compiling.place_forget()
             exe.place_forget()
             text2.place_forget()
+            r1.place_forget()
+            r2.place_forget()
     def compilation():
         text2.config(state=NORMAL)
         text2.delete('1.0', END)
@@ -127,6 +143,8 @@ def main():
         text1.insert(END, output)
         text1.config(state=DISABLED)
     def installer():
+        r1.place_forget()
+        r2.place_forget()
         compiling.place_forget()
         exe.place_forget()
         words.place_forget()
