@@ -2,7 +2,7 @@ from tkinter import *
 import os
 import subprocess as sub
 from threading import Thread
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 import time
 import io
 
@@ -40,7 +40,6 @@ def main():
                 filepath = os.path.abspath(filename.name)
                 print('openfile: '+filepath)
             
-            # print(filepath)
             words.config(state=NORMAL)
             words.insert(0, filepath)
             words.config(state=DISABLED)
@@ -69,23 +68,18 @@ def main():
             
             
     def compilation():
-        f = open(r"file_name.txt", "r")
-        filename = f.read()
-        f = open(r"file_path.txt", "r")
-        filepath = f.read()
-        if filename == '' or filename == None or filepath == '' or filepath == None:
-            print('it is empty')
-        else:
-            os.system('cd '+filepath)
-            os.system('python '+filename)
-        #     print('Unable to proceed ahead')
-        # else:
-        #     print(filep)
-        #     print(new_filename)
-        #     # n = str(fp[0])
-        #     # print('cd '+filep)
-        #     os.system('cd '+filep)
-        #     os.system('python '+new_filename)
+        try:
+            f = open(r"file_name.txt", "r")
+            filename = f.read()
+            f = open(r"file_path.txt", "r")
+            filepath = f.read()
+            if filename == '' or filename == None or filepath == '' or filepath == None:
+                print('it is empty')
+            else:
+                os.system('cd '+filepath)
+                os.system('python '+filename)
+        except Exception as e:
+            messagebox.showinfo("File deleted",  "We have observed in the deletion of file please stop tampering the files")
 
     def package_installer():
         text1.config(state=NORMAL)
