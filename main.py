@@ -6,13 +6,10 @@ from tkinter import filedialog, messagebox
 import time
 import io
 
-the_com_file_path = ''
-the_com_file = ''
 filep = ''
 new_filename = ''
 def main():
     output = ''
-    
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
     app = Tk()
     text1 = Text(app)
@@ -25,8 +22,6 @@ def main():
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE')
-    
-
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
@@ -40,10 +35,8 @@ def main():
         
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
         try:
-            # print("file name",filename)
             if filename:
                 filepath = os.path.abspath(filename.name)
-                # print('openfile: '+filepath)
             
             words.config(state=NORMAL)
             words.insert(0, filepath)
@@ -61,7 +54,6 @@ def main():
             text2.place(x = 220, y = 80, height = 350)
             compiling.place(x = 700, y = 450)
             exe.place(x = 800, y = 450)
-                
         except Exception as e:
             f = open("file_path.txt", "w")
             f.write('')
@@ -87,7 +79,6 @@ def main():
         except Exception as e:
             messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files!")
             app.destroy()
-
     def package_installer():
         text1.config(state=NORMAL)
         # os.system('python test.py')
@@ -95,7 +86,6 @@ def main():
         output, errors = p.communicate()
         text1.insert(END, output)
         text1.config(state=DISABLED)
-
     def installer():
         compiling.place_forget()
         exe.place_forget()
@@ -104,14 +94,12 @@ def main():
         text2.place_forget()
         text1.place(x = 220, y = 10)
         b1.place(x = 460, y = 400)
-
     def converter():
         text1.place_forget()
         b1.place_forget()
         open_button.place(x = 400, y = 40)
         words.place(x = 220, y = 10, width = 400)
-        
-
+    
     frame.place(x = 0, y = 0)
     install_module.place(x = 50, y = 20)
     convert.place(x = 50, y = 70)
