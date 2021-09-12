@@ -32,21 +32,14 @@ def main():
         words.config(state=NORMAL)
         words.delete(0, END)
         words.config(state=DISABLED)
-
-        filep, new_filename= '', ''
         
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
         try:
             print("file name",filename)
-            try:
-                if filename:
-                    filepath = os.path.abspath(filename.name)
-                    print('openfile: '+filepath)
-            except Exception:
-                filep = ''
-                filename = ''
-                compilation(filep, new_filename)
-
+            if filename:
+                filepath = os.path.abspath(filename.name)
+                print('openfile: '+filepath)
+            
             # print(filepath)
             words.config(state=NORMAL)
             words.insert(0, filepath)
@@ -63,9 +56,10 @@ def main():
             compiling.place(x = 460, y = 240)
                 
         except Exception as e:
-            filep, new_filename= '', None
-            compilation(filep, new_filename)
-            print('file is none', e)
+            f = open("file_path.txt", "w")
+            f.write('')
+            f = open("file_name.txt", "w")
+            f.write('')
             words.config(state=NORMAL)
             words.delete(0, END)
             words.config(state=DISABLED)
@@ -79,11 +73,11 @@ def main():
         filename = f.read()
         f = open(r"file_path.txt", "r")
         filepath = f.read()
-        # print(filepath)
-        # print(filename)
-        os.system('cd '+filepath)
-        os.system('python '+filename)
-        # if new_filename == '' or new_filename == None or filep == '' or filep == None:
+        if filename == '' or filename == None or filepath == '' or filepath == None:
+            print('it is empty')
+        else:
+            os.system('cd '+filepath)
+            os.system('python '+filename)
         #     print('Unable to proceed ahead')
         # else:
         #     print(filep)
