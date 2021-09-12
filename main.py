@@ -16,7 +16,9 @@ def main():
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
     app = Tk()
     text1 = Text(app)
+    text2 = Text(app)
     text1.config(state=DISABLED)
+    text2.config(state=DISABLED)
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
     words.config(state=DISABLED)
@@ -94,6 +96,8 @@ def main():
         text1.config(state=DISABLED)
 
     def installer():
+        compiling.place_forget()
+        exe.place_forget()
         words.place_forget()
         open_button.place_forget()
         text1.place(x = 220, y = 10)
