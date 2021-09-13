@@ -30,6 +30,10 @@ def main():
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
+    def statements():
+        text2.config(state=NORMAL)
+        text2.insert(END, 'RUNNING THE PROGRAM\n')
+        # text2.config(state=DISABLED)
     def selection():
         # print(str(var.get())
         print(str(var.get()))
@@ -129,7 +133,15 @@ def main():
             filepath = f.read()
             if filename == '' or filename == None or filepath == '' or filepath == None:
                 print('it is empty')
+                text2.config(state=NORMAL)
+                text2.insert(END, 'THE FILES ARE EMPTY!\n')
+                text2.config(state=DISABLED)
+                messagebox.showinfo("THE FILES ARE EMPTY!",  "We have observed in manipulation of file please stop tampering the files!")
+                app.destroy()
             else:
+                # Thread(
+                #         target=lambda: statements(), daemon=True
+                #     ).start()
                 text2.config(state=NORMAL)
                 text2.insert(END, 'RUNNING THE PROGRAM\n')
                 p = sub.Popen('cd '+filepath ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
@@ -138,6 +150,7 @@ def main():
                 p = sub.Popen("python "+filename ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
                 output, errors = p.communicate()
                 text2.insert(END, output)
+                text2.insert(END, 'COMPILED SUCCESSFULLY!\n')
                 text2.config(state=DISABLED) 
                 # os.system('cd '+filepath)
                 # os.system('python '+filename)
@@ -173,7 +186,7 @@ def main():
     frame.place(x = 0, y = 0)
     install_module.place(x = 50, y = 20)
     convert.place(x = 50, y = 70)
-
+    # app.attributes('-alpha', 0.85)
     app.title('Transformer')
     app.geometry('920x480')
     app.mainloop()
