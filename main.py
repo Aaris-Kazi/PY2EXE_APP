@@ -56,7 +56,7 @@ def main():
                 if int(terminal) == 1:
                     text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
                     os.system('cd '+filepath)
-                    os.system('pyinstaller --onefile -w '+filename)
+                    os.system('pyinstaller --onefile '+filename)
                 elif int(terminal) == 2:
                     text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
                     os.system('cd '+filepath)
