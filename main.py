@@ -36,7 +36,6 @@ def main():
         f = open("terminal_options.txt", "w")
         f.write(str(var.get()))
         f.close()
-        # print('Hello')
 
     def py_exe():
         text2.config(state=NORMAL)
@@ -47,11 +46,24 @@ def main():
             filename = f.read()
             f = open(r"file_path.txt", "r")
             filepath = f.read()
-            if filename == '' or filename == None or filepath == '' or filepath == None:
+            f = open(r"terminal_options.txt", "r")
+            terminal = f.read()
+            if filename == '' or filename == None or filepath == '' or filepath == None or terminal == '' or terminal == None:
                 print('it is empty')
             else:
                 text2.config(state=NORMAL)
                 text2.insert(END, 'CONVERTING THE PROGRAM\n')
+                # print(terminal)
+                # print(type(terminal))
+                if int(terminal) == 1:
+                    print('with terminal ')
+                    text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
+                elif int(terminal) == 2:
+                    text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
+                    print('without terminal ')
+                else:
+                    text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
+                    print("Please don't edit the file")
                 # p = sub.Popen('cd '+filepath ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
                 # output, errors = p.communicate()
                 # text2.insert(END, output)
@@ -59,8 +71,8 @@ def main():
                 # output, errors = p.communicate()
                 # text2.insert(END, output)
                 text2.config(state=DISABLED) 
-                os.system('cd '+filepath)
-                os.system('pyinstaller --onefile -w '+filename)
+                # os.system('cd '+filepath)
+                # os.system('pyinstaller --onefile -w '+filename)
                 # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
         except Exception as e:
             # print(e)
@@ -157,7 +169,9 @@ def main():
         b1.place_forget()
         open_button.place(x = 400, y = 40)
         words.place(x = 220, y = 10, width = 400)
-    
+    f = open("terminal_options.txt", "w")
+    f.write('1')
+    f.close()
     frame.place(x = 0, y = 0)
     install_module.place(x = 50, y = 20)
     convert.place(x = 50, y = 70)
