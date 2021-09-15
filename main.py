@@ -25,7 +25,7 @@ def main():
     l2 =Label(app, text = 'FILE NAME')
     ck = Checkbutton(app, text = 'LOGO', command = lambda: puticon())
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
-    icon_button = Button(app, text = 'ICON FILE', command = lambda: openfile())
+    icon_button = Button(app, text = 'ICON FILE', command = lambda: iconfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
     r1 = Radiobutton(app, text="WITH TERMINAL", variable=var, value=1, command = lambda:selection())
@@ -35,6 +35,8 @@ def main():
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
+    def iconfile():
+        print('icon')
     def puticon():
         global temp
         if temp:
@@ -42,8 +44,8 @@ def main():
             file_icon.place_forget()
             icon_button.place_forget()
         else:
-            file_icon.place(x = 240,y = 80)
-            icon_button.place(x = 480,y = 80)
+            file_icon.place(x = 240, y = 80, width = 270)
+            icon_button.place(x = 520,y = 80)
             temp= True
     def statements():
         text2.config(state=NORMAL)
