@@ -38,7 +38,6 @@ def main():
         # text2.config(state=DISABLED)
     def selection():
         # print(str(var.get())
-        print(str(var.get()))
         f = open("terminal_options.txt", "w")
         f.write(str(var.get()))
         f.close()
@@ -49,41 +48,19 @@ def main():
         text2.config(state = DISABLED)
         inp1 = words.get()
         inp2 = file_words.get()
-        try:
-            # f = open(r"file_name.txt", "r")
-            # filename = f.read()
-            # f = open(r"file_path.txt", "r")
-            # filepath = f.read()
-            # f = open(r"terminal_options.txt", "r")
-            # terminal = f.read()
-            if inp2 == '' or inp2 == None or filepath == '' or filepath == None or terminal == '' or terminal == None:
-                print('it is empty')
-            else:
-                text2.config(state=NORMAL)
-                text2.insert(END, 'CONVERTING THE PROGRAM\n')
-                if int(terminal) == 1:
-                    text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
-                    os.chdir(inp1)
-                    os.system('pyinstaller --onefile '+inp2)
-                elif int(terminal) == 2:
-                    text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
-                    os.chdir(+inp1)
-                    os.system('pyinstaller --onefile -w '+inp2)
-                else:
-                    text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
-                # p = sub.Popen('cd '+filepath ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
-                # output, errors = p.communicate()
-                # text2.insert(END, output)
-                # p = sub.Popen("python "+filename ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
-                # output, errors = p.communicate()
-                # text2.insert(END, output)
-                text2.config(state=DISABLED) 
-                
+        terminal = str(var.get())
+        print(terminal)
+        if int(terminal) == 1:
+            text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
+            os.chdir(inp1)
+            os.system('pyinstaller --onefile '+inp2)
+        elif int(terminal) == 2:
+            text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
+            os.chdir(inp1)
+            os.system('pyinstaller --onefile -w '+inp2)
+        else:
+            text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
                 # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
-        except Exception as e:
-            print(e)
-            messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files!")
-            app.destroy()
     def openfile():
         words.config(state=NORMAL)
         words.delete(0, END)
@@ -105,11 +82,6 @@ def main():
             # inp = file_words.get()
             file_words.config(state=DISABLED)
             # print(inp)
-            f = open("file_path.txt", "w")
-            f.write(filep)
-            f = open("file_name.txt", "w")
-            f.write(new_filename)
-            f.close()
             r1.select()
             r1.place( x = 500, y = 80)
             r2.place( x = 650, y = 80)
@@ -117,10 +89,6 @@ def main():
             compiling.place(x = 700, y = 450)
             exe.place(x = 800, y = 450)
         except Exception as e:
-            f = open("file_path.txt", "w")
-            f.write('')
-            f = open("file_name.txt", "w")
-            f.write('')
             words.config(state=NORMAL)
             words.delete(0, END)
             words.config(state=DISABLED)
