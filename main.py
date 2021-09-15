@@ -23,7 +23,7 @@ def main():
     file_icon = Entry(app)
     l1 =Label(app, text = 'FILE PATH')
     l2 =Label(app, text = 'FILE NAME')
-    ck = Checkbutton(app, text = 'ICONS', command = lambda: puticon())
+    ck = Checkbutton(app, text = 'LOGO', command = lambda: puticon())
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
