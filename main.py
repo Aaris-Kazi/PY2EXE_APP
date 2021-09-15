@@ -6,8 +6,6 @@ from tkinter import filedialog, messagebox
 import time
 import io
 
-filep = ''
-new_filename = ''
 def main():
     output = ''
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
@@ -20,6 +18,10 @@ def main():
     b1 = Button(app, text= 'INSTALL MODULE', command = lambda: package_installer())
     words = Entry(app)
     words.config(state=DISABLED)
+    file_words = Entry(app)
+    file_words.config(state=DISABLED)
+    l1 =Label(app, text = 'FILE PATH')
+    l2 =Label(app, text = 'FILE NAME')
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
@@ -45,26 +47,28 @@ def main():
         text2.config(state=NORMAL)
         text2.delete('1.0', END)
         text2.config(state = DISABLED)
+        inp1 = words.get()
+        inp2 = file_words.get()
         try:
-            f = open(r"file_name.txt", "r")
-            filename = f.read()
-            f = open(r"file_path.txt", "r")
-            filepath = f.read()
-            f = open(r"terminal_options.txt", "r")
-            terminal = f.read()
-            if filename == '' or filename == None or filepath == '' or filepath == None or terminal == '' or terminal == None:
+            # f = open(r"file_name.txt", "r")
+            # filename = f.read()
+            # f = open(r"file_path.txt", "r")
+            # filepath = f.read()
+            # f = open(r"terminal_options.txt", "r")
+            # terminal = f.read()
+            if inp2 == '' or inp2 == None or filepath == '' or filepath == None or terminal == '' or terminal == None:
                 print('it is empty')
             else:
                 text2.config(state=NORMAL)
                 text2.insert(END, 'CONVERTING THE PROGRAM\n')
                 if int(terminal) == 1:
                     text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
-                    os.system('cd '+filepath)
-                    os.system('pyinstaller --onefile '+filename)
+                    os.chdir(inp1)
+                    os.system('pyinstaller --onefile '+inp2)
                 elif int(terminal) == 2:
                     text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
-                    os.system('cd '+filepath)
-                    os.system('pyinstaller --onefile -w '+filename)
+                    os.chdir(+inp1)
+                    os.system('pyinstaller --onefile -w '+inp2)
                 else:
                     text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
                 # p = sub.Popen('cd '+filepath ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
@@ -77,7 +81,7 @@ def main():
                 
                 # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
         except Exception as e:
-            # print(e)
+            print(e)
             messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files!")
             app.destroy()
     def openfile():
@@ -90,23 +94,26 @@ def main():
             if filename:
                 filepath = os.path.abspath(filename.name)
             
-            words.config(state=NORMAL)
-            words.insert(0, filepath)
-            words.config(state=DISABLED)
             new_filename = os.path.basename(filepath)
-            print(filepath)
-            print(new_filename)
             fp = filepath.split(new_filename)
             filep = fp[0]
+            words.config(state=NORMAL)
+            words.insert(0, filep)
+            words.config(state=DISABLED)
+            file_words.config(state=NORMAL)
+            file_words.insert(0, new_filename)
+            # inp = file_words.get()
+            file_words.config(state=DISABLED)
+            # print(inp)
             f = open("file_path.txt", "w")
             f.write(filep)
             f = open("file_name.txt", "w")
             f.write(new_filename)
             f.close()
             r1.select()
-            r1.place( x = 500, y = 50)
-            r2.place( x = 650, y = 50)
-            text2.place(x = 220, y = 80, height = 350)
+            r1.place( x = 500, y = 80)
+            r2.place( x = 650, y = 80)
+            text2.place(x = 220, y = 120, height = 300)
             compiling.place(x = 700, y = 450)
             exe.place(x = 800, y = 450)
         except Exception as e:
@@ -126,38 +133,16 @@ def main():
         text2.config(state=NORMAL)
         text2.delete('1.0', END)
         text2.config(state = DISABLED)
-        try:
-            f = open(r"file_name.txt", "r")
-            filename = f.read()
-            f = open(r"file_path.txt", "r")
-            filepath = f.read()
-            if filename == '' or filename == None or filepath == '' or filepath == None:
-                print('it is empty')
-                text2.config(state=NORMAL)
-                text2.insert(END, 'THE FILES ARE EMPTY!\n')
-                text2.config(state=DISABLED)
-                messagebox.showinfo("THE FILES ARE EMPTY!",  "We have observed in manipulation of file please stop tampering the files!")
-                app.destroy()
-            else:
-                # Thread(
-                #         target=lambda: statements(), daemon=True
-                #     ).start()
-                text2.config(state=NORMAL)
-                text2.insert(END, 'RUNNING THE PROGRAM\n')
-                p = sub.Popen('cd '+filepath ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
-                output, errors = p.communicate()
-                text2.insert(END, output)
-                p = sub.Popen("python "+filename ,stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
-                output, errors = p.communicate()
-                text2.insert(END, output)
-                text2.insert(END, 'COMPILED SUCCESSFULLY!\n')
-                text2.config(state=DISABLED) 
-                # os.system('cd '+filepath)
-                # os.system('python '+filename)
-        except Exception as e:
-            # print(e)
-            messagebox.showinfo("File Not Found!",  "We have observed in the deletion of file please stop tampering the files!")
-            app.destroy()
+        inp1 = words.get()
+        inp2 = file_words.get()
+        print(inp1, inp2)
+        print(str(var.get()))
+        text2.config(state=NORMAL)
+        text2.insert(END, 'RUNNING THE PROGRAM\n')
+        text2.insert(END, 'COMPILED SUCCESSFULLY!\n')
+        text2.config(state=DISABLED)
+        os.chdir(inp1)
+        os.system('python '+inp2)
     def package_installer():
         text1.config(state=NORMAL)
         # os.system('python test.py')
@@ -170,7 +155,10 @@ def main():
         r2.place_forget()
         compiling.place_forget()
         exe.place_forget()
+        l1.place_forget()
+        l2.place_forget()
         words.place_forget()
+        file_words.place_forget()
         open_button.place_forget()
         text2.place_forget()
         text1.place(x = 220, y = 10)
@@ -178,8 +166,11 @@ def main():
     def converter():
         text1.place_forget()
         b1.place_forget()
-        open_button.place(x = 400, y = 40)
-        words.place(x = 220, y = 10, width = 400)
+        l1.place(x= 220, y = 10)
+        l2.place(x= 650, y = 10)
+        open_button.place(x = 800, y = 40)
+        words.place(x = 220, y = 40, width = 400)
+        file_words.place(x = 650, y = 40, width = 140)
     f = open("terminal_options.txt", "w")
     f.write('1')
     f.close()
