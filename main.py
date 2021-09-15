@@ -36,7 +36,17 @@ def main():
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
     def iconfile():
-        print('icon')
+        filename=filedialog.askopenfile(initialdir='GUI/',title="Select a ico file",filetypes=(("ICON FILES","*.ico"),("All files",'*')))
+        if filename:
+            filepath = os.path.abspath(filename.name)
+            inp1 = words.get()
+            try:
+                ic1, ic2 = filepath.split(inp1)
+            except Exception:
+                ic2 = filepath
+            print(ic2)
+        file_icon.insert(0, ic2)
+        # print('icon')
     def puticon():
         global temp
         if temp:
@@ -44,7 +54,7 @@ def main():
             file_icon.place_forget()
             icon_button.place_forget()
         else:
-            file_icon.place(x = 240, y = 80, width = 270)
+            file_icon.place(x = 290, y = 80, width = 230)
             icon_button.place(x = 520,y = 80)
             temp= True
     def statements():
