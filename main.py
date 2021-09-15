@@ -29,8 +29,8 @@ def main():
     icon_button = Button(app, text = 'ICON FILE', command = lambda: iconfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
-    r1 = Radiobutton(app, text="WITH TERMINAL", variable=var, value=1, command = lambda:selection())
-    r2 = Radiobutton(app, text="WITHOUT TERMINAL", variable=var, value=2, command = lambda: selection())
+    r1 = Radiobutton(app, text="WITH TERMINAL", variable=var, value=1)
+    r2 = Radiobutton(app, text="WITHOUT TERMINAL", variable=var, value=2)
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
@@ -72,11 +72,6 @@ def main():
         text2.config(state=NORMAL)
         text2.insert(END, 'RUNNING THE PROGRAM\n')
         # text2.config(state=DISABLED)
-    def selection():
-        # print(str(var.get())
-        f = open("terminal_options.txt", "w")
-        f.write(str(var.get()))
-        f.close()
 
     def py_exe():
         text2.config(state=NORMAL)
