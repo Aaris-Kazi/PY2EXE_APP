@@ -21,6 +21,7 @@ def main():
     file_words = Entry(app)
     file_words.config(state=DISABLED)
     file_icon = Entry(app)
+    file_icon.config(state = DISABLED)
     l1 =Label(app, text = 'FILE PATH')
     l2 =Label(app, text = 'FILE NAME')
     ck = Checkbutton(app, text = 'LOGO', command = lambda: puticon())
@@ -37,25 +38,35 @@ def main():
     # //////////////       Defining Functions        ////////////////////////
     def iconfile():
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a ico file",filetypes=(("ICON FILES","*.ico"),("All files",'*')))
-        if filename:
-            filepath = os.path.abspath(filename.name)
-            inp1 = words.get()
-            try:
-                ic1, ic2 = filepath.split(inp1)
-            except Exception:
-                ic2 = filepath
-            print(ic2)
-        file_icon.insert(0, ic2)
-        # print('icon')
+        try:
+            if filename:
+                filepath = os.path.abspath(filename.name)
+                inp1 = words.get()
+                try:
+                    ic1, ic2 = filepath.split(inp1)
+                except Exception:
+                    ic2 = filepath
+                # print(ic2)
+            file_icon.config(state = NORMAL)
+            file_icon.insert(0, ic2)
+            file_icon.config(state = DISABLED)
+        except Exception:
+            file_icon.config(state = NORMAL)
+            file_icon.delete(0, END)
+            file_icon.config(state = DISABLED)
+                # file_icon.delete()
     def puticon():
         global temp
         if temp:
             temp =False
             file_icon.place_forget()
             icon_button.place_forget()
+            file_icon.config(state = NORMAL)
+            file_icon.delete(0, END)
+            file_icon.config(state = DISABLED)
         else:
             file_icon.place(x = 290, y = 80, width = 230)
-            icon_button.place(x = 520,y = 80)
+            icon_button.place(x = 524,y = 80)
             temp= True
     def statements():
         text2.config(state=NORMAL)
@@ -75,16 +86,18 @@ def main():
         inp2 = file_words.get()
         terminal = str(var.get())
         print(terminal)
-        if int(terminal) == 1:
-            text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
-            os.chdir(inp1)
-            os.system('pyinstaller --onefile '+inp2)
-        elif int(terminal) == 2:
-            text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
-            os.chdir(inp1)
-            os.system('pyinstaller --onefile -w '+inp2)
-        else:
-            text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
+        icons = file_icon.get()
+        print(icons)
+        # if int(terminal) == 1:
+        #     text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
+        #     os.chdir(inp1)
+        #     os.system('pyinstaller --onefile '+inp2)
+        # elif int(terminal) == 2:
+        #     text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
+        #     os.chdir(inp1)
+        #     os.system('pyinstaller --onefile -w '+inp2)
+        # else:
+        #     text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
                 # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
     def openfile():
         words.config(state=NORMAL)
