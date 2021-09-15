@@ -22,6 +22,7 @@ def main():
     file_words.config(state=DISABLED)
     l1 =Label(app, text = 'FILE PATH')
     l2 =Label(app, text = 'FILE NAME')
+    ck = Checkbutton(app, text = 'ICONS')
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
@@ -65,12 +66,10 @@ def main():
         words.config(state=NORMAL)
         words.delete(0, END)
         words.config(state=DISABLED)
-        
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a Python file",filetypes=(("Python files","*.py"),("All files",'*')))
         try:
             if filename:
                 filepath = os.path.abspath(filename.name)
-            
             new_filename = os.path.basename(filepath)
             fp = filepath.split(new_filename)
             filep = fp[0]
