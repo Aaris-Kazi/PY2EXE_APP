@@ -25,6 +25,7 @@ def main():
     l2 =Label(app, text = 'FILE NAME')
     ck = Checkbutton(app, text = 'LOGO', command = lambda: puticon())
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
+    icon_button = Button(app, text = 'ICON FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
     r1 = Radiobutton(app, text="WITH TERMINAL", variable=var, value=1, command = lambda:selection())
@@ -39,8 +40,10 @@ def main():
         if temp:
             temp =False
             file_icon.place_forget()
+            icon_button.place_forget()
         else:
             file_icon.place(x = 240,y = 80)
+            icon_button.place(x = 480,y = 80)
             temp= True
     def statements():
         text2.config(state=NORMAL)
@@ -91,8 +94,8 @@ def main():
             file_words.config(state=DISABLED)
             # print(inp)
             r1.select()
-            r1.place( x = 500, y = 80)
-            r2.place( x = 650, y = 80)
+            r1.place( x = 600, y = 80)
+            r2.place( x = 750, y = 80)
             ck.place(x = 220, y = 80)
             text2.place(x = 220, y = 120, height = 300)
             compiling.place(x = 700, y = 450)
@@ -126,7 +129,6 @@ def main():
         os.system('python '+inp2)
     def package_installer():
         text1.config(state=NORMAL)
-        # os.system('python test.py')
         p = sub.Popen('pip install pyinstaller',stdout=sub.PIPE,stderr=sub.PIPE, shell= True)
         output, errors = p.communicate()
         text1.insert(END, output)
@@ -138,6 +140,8 @@ def main():
         file_words.config(state=NORMAL)
         file_words.delete(0, END)
         file_words.config(state=DISABLED)
+        icon_button.place_forget()
+        file_icon.place_forget()
         r1.place_forget()
         r2.place_forget()
         ck.place_forget()
