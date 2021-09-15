@@ -5,7 +5,7 @@ from threading import Thread
 from tkinter import filedialog, messagebox
 import time
 import io
-
+temp = False
 def main():
     output = ''
     # /////////////////   INITIALISING THE OBJECTS   //////////////////////////
@@ -20,9 +20,10 @@ def main():
     words.config(state=DISABLED)
     file_words = Entry(app)
     file_words.config(state=DISABLED)
+    file_icon = Entry(app)
     l1 =Label(app, text = 'FILE PATH')
     l2 =Label(app, text = 'FILE NAME')
-    ck = Checkbutton(app, text = 'ICONS')
+    ck = Checkbutton(app, text = 'ICONS', command = lambda: puticon())
     open_button = Button(app, text = 'OPEN FILE', command = lambda: openfile())
     compiling = Button(app, text = 'RUN/ TEST',command = lambda: compilation())
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
@@ -33,6 +34,14 @@ def main():
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
     # //////////////       Defining Functions        ////////////////////////
+    def puticon():
+        global temp
+        if temp:
+            temp =False
+            file_icon.place_forget()
+        else:
+            file_icon.place(x = 240,y = 80)
+            temp= True
     def statements():
         text2.config(state=NORMAL)
         text2.insert(END, 'RUNNING THE PROGRAM\n')
