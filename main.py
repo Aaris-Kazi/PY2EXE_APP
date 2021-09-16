@@ -90,9 +90,9 @@ def main():
             os.system('pyinstaller --onefile '+inp2)
         elif int(terminal) == 1 and len(icons) != 0:
             print('only terminal with icon')
-            # text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
-            # os.chdir(inp1)
-            # os.system('pyinstaller --onefile '+inp2)
+            text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL AND WITH ICON\n')
+            os.chdir(inp1)
+            os.system('pyinstaller --onefile -i "'+icons+'" '+inp2)
             # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
         elif int(terminal) == 2 and len(icons) == 0:
             # print('without terminal')
@@ -101,9 +101,10 @@ def main():
             os.system('pyinstaller --onefile -w '+inp2)
         elif int(terminal) == 2 and len(icons) != 0:
             print('without terminal with icon')
-            # text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
-            # os.chdir(inp1)
-            # os.system('pyinstaller --onefile -w '+inp2)
+            text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL AND WITH ICON\n')
+            print('pyinstaller --onefile -w -i "'+str(icons)+'" '+inp2)
+            os.chdir(inp1)
+            os.system('pyinstaller --onefile -w -i "'+str(icons)+'" '+inp2)
             # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
         else:
             text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
