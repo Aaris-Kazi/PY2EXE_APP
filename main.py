@@ -35,7 +35,10 @@ def main():
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
     convert = Button(app, text = 'CONVERT TO EXE   ', command = lambda: converter())
+    credit = Button(app, text = 'CREDITS   ', command = lambda: information())
     # //////////////       Defining Functions        ////////////////////////
+    def information():
+        messagebox.showinfo("CREDITS INFORMATION", "DEVOLOPED BY\n Aaris Kazi \nPOWERED BY \n Pyinstaller")
     def iconfile():
         filename=filedialog.askopenfile(initialdir='GUI/',title="Select a ico file",filetypes=(("ICON FILES","*.ico"),("All files",'*')))
         try:
@@ -71,7 +74,7 @@ def main():
     def statements():
         text2.config(state=NORMAL)
         text2.insert(END, 'RUNNING THE PROGRAM\n')
-        # text2.config(state=DISABLED)
+        text2.config(state=DISABLED)
 
     def py_exe():
         text2.config(state=NORMAL)
@@ -97,15 +100,15 @@ def main():
             os.system('pyinstaller --onefile -i "'+icons+'" '+inp2)
             # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
         elif int(terminal) == 2 and len(icons) == 0:
-            text2.config(status = NORMAL)
+            text2.config(state = NORMAL)
             text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
-            text2.config(status = DISABLED)
+            text2.config(state = DISABLED)
             os.chdir(inp1)
             os.system('pyinstaller --onefile -w '+inp2)
         elif int(terminal) == 2 and len(icons) != 0:
-            text2.config(status = NORMAL)
+            text2.config(state = NORMAL)
             text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL AND WITH ICON\n')
-            text2.config(status = DISABLED) 
+            text2.config(state = DISABLED) 
             print('pyinstaller --onefile -w -i "'+str(icons)+'" '+inp2)
             os.chdir(inp1)
             os.system('pyinstaller --onefile -w -i "'+str(icons)+'" '+inp2)
@@ -204,9 +207,12 @@ def main():
     frame.place(x = 0, y = 0)
     install_module.place(x = 50, y = 20)
     convert.place(x = 50, y = 70)
+    credit.place(x = 50, y = 400)
     # app.attributes('-alpha', 0.85)
-    app.title('Transformer')
+    app.iconbitmap('Exe.ico')
+    app.title('PEXEY')
     app.geometry('920x480')
+    app.resizable(width = False, height = False)
     app.mainloop()
 
 if __name__ == '__main__':
