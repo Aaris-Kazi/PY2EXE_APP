@@ -80,20 +80,34 @@ def main():
         inp1 = words.get()
         inp2 = file_words.get()
         terminal = str(var.get())
-        print(terminal)
+        # print(terminal)
         icons = file_icon.get()
-        print(icons)
-        # if int(terminal) == 1:
-        #     text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
-        #     os.chdir(inp1)
-        #     os.system('pyinstaller --onefile '+inp2)
-        # elif int(terminal) == 2:
-        #     text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
-        #     os.chdir(inp1)
-        #     os.system('pyinstaller --onefile -w '+inp2)
-        # else:
-        #     text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
-                # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
+        # print(icons)
+        if int(terminal) == 1 and len(icons) == 0:
+            # print('only terminal')
+            text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
+            os.chdir(inp1)
+            os.system('pyinstaller --onefile '+inp2)
+        elif int(terminal) == 1 and len(icons) != 0:
+            print('only terminal with icon')
+            # text2.insert(END, 'CONVERTING THE PROGRAM ALONG WITH THE TERMINAL\n')
+            # os.chdir(inp1)
+            # os.system('pyinstaller --onefile '+inp2)
+            # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
+        elif int(terminal) == 2 and len(icons) == 0:
+            # print('without terminal')
+            text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
+            os.chdir(inp1)
+            os.system('pyinstaller --onefile -w '+inp2)
+        elif int(terminal) == 2 and len(icons) != 0:
+            print('without terminal with icon')
+            # text2.insert(END, 'CONVERTING THE PROGRAM WITHOUT THE TERMINAL\n')
+            # os.chdir(inp1)
+            # os.system('pyinstaller --onefile -w '+inp2)
+            # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
+        else:
+            text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
+                
     def openfile():
         words.config(state=NORMAL)
         words.delete(0, END)
