@@ -112,7 +112,7 @@ def main():
             print('pyinstaller --onefile -w -i "'+str(icons)+'" '+inp2)
             os.chdir(inp1)
             os.system('pyinstaller --onefile -w -i "'+str(icons)+'" '+inp2)
-            # os.system('pyinstaller --onefile -w -i "path.ico" yourfile.py'+filename)
+            # pyinstaller --onefile -w -i "Coffee.ico" add_data "Exe.ico" main.py
         else:
             text2.insert(END, 'PLEASE DO NOT EDIT THE FILE\n')
                 
