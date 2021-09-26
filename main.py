@@ -1,10 +1,11 @@
 from tkinter import *
+from PIL.ImageTk import PhotoImage, Image
 import os
 import subprocess as sub
-from threading import Thread
-from tkinter import filedialog, messagebox
+# from threading import Thread
+from tkinter import filedialog, messagebox, Label
 import time
-import io
+# import io
 temp = False
 def main():
     output = ''
@@ -31,6 +32,7 @@ def main():
     exe = Button(app, text = 'CONVERT TO EXE', command = lambda: py_exe())
     r1 = Radiobutton(app, text="WITH TERMINAL", variable=var, value=1)
     r2 = Radiobutton(app, text="WITHOUT TERMINAL", variable=var, value=2)
+    panel = Label(app)
     # //////////////////   BY DEFAULT INITIALISATION ON THE SCREEN ////////////////////
     frame = Frame(app, width= 200, height = 480, bg = 'blue')
     install_module = Button(app, text = 'INSTALL MODULES', command = lambda: installer())
@@ -53,10 +55,19 @@ def main():
             file_icon.config(state = NORMAL)
             file_icon.insert(0, ic2)
             file_icon.config(state = DISABLED)
-        except Exception:
+            img = Image.open(filepath)
+            img = img.resize((40,40), Image.ANTIALIAS)
+            pimg = PhotoImage(img)
+            panel.configure(image = pimg)
+            panel.image =pimg
+            # panel.config(image = pimg, text = 'working')
+            panel.place(x= 220, y = 120)
+        except Exception as e:
             file_icon.config(state = NORMAL)
             file_icon.delete(0, END)
             file_icon.config(state = DISABLED)
+            panel.place_forget()
+            # print(e)
                 # file_icon.delete()
     def puticon():
         global temp
@@ -133,11 +144,12 @@ def main():
             file_words.config(state=NORMAL)
             file_words.insert(0, new_filename)
             file_words.config(state=DISABLED)
+            
             r1.select()
             r1.place( x = 600, y = 80)
             r2.place( x = 750, y = 80)
             ck.place(x = 220, y = 80)
-            text2.place(x = 220, y = 120, height = 300)
+            text2.place(x = 220, y = 170, height = 250)
             compiling.place(x = 700, y = 450)
             exe.place(x = 800, y = 450)
         except Exception as e:
@@ -209,7 +221,7 @@ def main():
     convert.place(x = 50, y = 70)
     credit.place(x = 50, y = 400)
     # app.attributes('-alpha', 0.85)
-    app.iconbitmap('Exe.ico')
+    # app.iconbitmap('Exe.ico')
     app.title('PEXEY')
     app.geometry('920x480')
     app.resizable(width = False, height = False)
