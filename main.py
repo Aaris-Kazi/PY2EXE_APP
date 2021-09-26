@@ -170,7 +170,8 @@ def main():
             file_icon.place_forget()
             icon_button.place_forget()
             panel.place_forget()
-            # panel.place_forget()
+            # ck.deselect()
+            # temp = False
     def compilation():
         text2.config(state=NORMAL)
         text2.delete('1.0', END)
