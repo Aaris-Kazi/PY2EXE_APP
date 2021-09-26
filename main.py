@@ -3,7 +3,7 @@ from PIL.ImageTk import PhotoImage, Image
 import os
 import subprocess as sub
 # from threading import Thread
-from tkinter import filedialog, messagebox, Label
+from tkinter import filedialog, messagebox, Label, Text, Button, Entry, Frame, END, IntVar, NORMAL, DISABLED, Checkbutton, Radiobutton
 import time
 # import io
 temp = False
@@ -223,11 +223,28 @@ def main():
         open_button.place(x = 800, y = 40)
         words.place(x = 220, y = 40, width = 400)
         file_words.place(x = 650, y = 40, width = 140)
-    
+    def move2(i):
+        if i<=50:
+            credit.place(x=i, y=400)
+            credit.after(31, lambda: move2(i)) #after every 100ms
+            i = i+1
+    def move(i):
+        if i<=50:
+            convert.place(x=i, y=70)
+            convert.after(20, lambda: move(i)) #after every 100ms
+            i = i+1
+    def move1(i):
+        if i<=50:
+            install_module.place(x=i, y=20)
+            b1.after(24, lambda: move1(i)) #after every 100ms
+            i = i+1
     frame.place(x = 0, y = 0)
-    install_module.place(x = 50, y = 20)
-    convert.place(x = 50, y = 70)
-    credit.place(x = 50, y = 400)
+    # install_module.place(x = 50, y = 20)
+    # convert.place(x = 50, y = 70)
+    move(20)
+    move1(20)
+    move2(20)
+    # credit.place(x = 50, y = 400)
     # app.attributes('-alpha', 0.85)
     # app.iconbitmap('Exe.ico')
     app.title('PEXEY')
