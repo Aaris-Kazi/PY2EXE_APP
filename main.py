@@ -75,6 +75,7 @@ def main():
             temp =False
             file_icon.place_forget()
             icon_button.place_forget()
+            panel.place_forget()
             file_icon.config(state = NORMAL)
             file_icon.delete(0, END)
             file_icon.config(state = DISABLED)
@@ -165,6 +166,11 @@ def main():
             r1.place_forget()
             r2.place_forget()
             ck.place_forget()
+            # ////// for icon
+            file_icon.place_forget()
+            icon_button.place_forget()
+            panel.place_forget()
+            # panel.place_forget()
     def compilation():
         text2.config(state=NORMAL)
         text2.delete('1.0', END)
@@ -205,6 +211,7 @@ def main():
         file_words.place_forget()
         open_button.place_forget()
         text2.place_forget()
+        panel.place_forget()
         text1.place(x = 220, y = 10)
         b1.place(x = 460, y = 400)
     def converter():
