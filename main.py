@@ -3,7 +3,8 @@ from PIL.ImageTk import PhotoImage, Image
 import os
 import subprocess as sub
 # from threading import Thread
-from tkinter import filedialog, messagebox, Label, Text, Button, Entry, Frame, END, IntVar, NORMAL, DISABLED, Checkbutton, Radiobutton
+# pyinstaller --onefile --add-binary='/System/Library/Frameworks/Tk.framework/Tk':'tk' --add-binary='/System/Library/Frameworks/Tcl.framework/Tcl':'tcl' your_script.py
+from tkinter import filedialog, messagebox, Label, Tcl
 import time
 # import io
 temp = False
@@ -239,12 +240,9 @@ def main():
             b1.after(24, lambda: move1(i)) #after every 100ms
             i = i+1
     frame.place(x = 0, y = 0)
-    # install_module.place(x = 50, y = 20)
-    # convert.place(x = 50, y = 70)
     move(20)
     move1(20)
     move2(20)
-    # credit.place(x = 50, y = 400)
     # app.attributes('-alpha', 0.85)
     # app.iconbitmap('Exe.ico')
     app.title('PEXEY')
