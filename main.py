@@ -3,6 +3,7 @@ from PIL.ImageTk import PhotoImage, Image
 import os
 import subprocess as sub
 # from threading import Thread
+# pyinstaller --onefile -i "Exe.ico" -F --add-binary='tk86t.dll;tk' -F --add-binary='tcl86t.dll;tcl' main.py
 # pyinstaller --onefile --add-binary='/System/Library/Frameworks/Tk.framework/Tk':'tk' --add-binary='/System/Library/Frameworks/Tcl.framework/Tcl':'tcl' your_script.py
 from tkinter import filedialog, messagebox, Label, Tcl
 import time
